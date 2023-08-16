@@ -7,6 +7,7 @@ interface CardDetailsProps {
     setCards: Function;
 }
 
+
 const CardDetails: FunctionComponent<CardDetailsProps> = ({ cards, setCards }) => {
     let { id } = useParams();
     let findId: Card | undefined = cards.find(
