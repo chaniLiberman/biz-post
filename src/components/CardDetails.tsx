@@ -7,6 +7,7 @@ interface CardDetailsProps {
     setCards: Function;
 }
 
+// delete comment
 
 const CardDetails: FunctionComponent<CardDetailsProps> = ({ cards, setCards }) => {
     let { id } = useParams();
