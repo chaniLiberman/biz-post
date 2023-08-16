@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&family=Marck+Script&family=Pattaya&family=Ysabeau+Office:wght@300;400&display=swap');
+:root {
+    /* #ededed */
+    --color-primary: #ffffff;
+    --color-secondary: #12181b;
+    --color-modal: #ededed;
+    --color-title: #212529;
+    --color-text: #12181b;
+    --color-white: #ffffff;
+    --color-black: #000;
+    --color-grey0: #f8f8f8;
+    --color-grey-1: #dbe1e8;
+    --color-grey-2: #b2becd;
+    --color-grey-3: #6c7983;
+    --color-grey-4: #454e56;
+    --color-grey-5: #2a2e35;
+    --color-grey-6: #12181b;
+    --box-shadow-1: 0 3px 15px rgba(0, 0, 0, 0.3);
+    --box-shadow-2: 0 2px 5px rgba(248, 248, 248, 0.2);
+    --hover-color: #fff;
+    --color-gold:#947427;
+    --background-image: url("/public/Images/backGrondMain3.jpg");
+    --background-color-blur: rgba(0, 0, 0, 0.02);
+    --color-social:#000;
+    --font-weight:550;
+  }
+  
+  .dark {
+    --color-primary: #212529;
+    --color-secondary: #fff;
+    --color-modal: #414952;
+    --color-title: #bfd0e6;
+    --color-text: #f8f8f8;
+    --color-white: #cdcecf;
+    --color-black: #000;
+    --color-grey0: #f8f8f8;
+    --color-grey-1: #6c7983;
+    --color-grey-2: #6c7983;
+    --color-grey-3: #6c7983;
+    --color-grey-4: #454e56;
+    --color-grey-5: #f8f8f8;
+    --color-grey-6: #12181b;
+    --br-sm-2: 14px;
+    --box-shadow-1: 0 3px 15px rgba(0, 0, 0, 0.3);
+    --box-shadow-2: 0 2px 5px rgba(248, 248, 248, 0.2);
+    --hover-color: #fff;
+    --color-gold:#fff;
+    --background-image: url("/public/Images/backGrondMain1.jpg");
+    --background-color-blur: rgba(0, 0, 0, 0.1);
+    --color-social:#ff0000;
+    --font-weight:590;
+  }
+/* * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Ysabeau Office', sans-serif;
+    font-weight: var(--font-weight);
+} */
+.App {
+    background-image: var(--background-image);
+    background-size: cover;
+    color:var(--color-gold);
+    font-family: 'Ysabeau Office', sans-serif;
+    font-weight: var(--font-weight);
+}
+.navbarStyle{
+    background-color: var(--color-primary);
+}
+.mainText{
+    font-weight: 700;
+}
+.aboutStyle p,
+.sandBoxStyle
+{
+    color: var(--color-secondary);
+}
+.input{
+    color: #000;
+}
+.footerStyle{
+    background-color: var(--color-primary);
+}
+.footerStyle ul{
+    color: var(--color-social);
+}
+.footerStyle p{
+    color: var(--color-text);
+}
+.backGround {
+    position: relative;
+    line-height: 1.8;
+    backdrop-filter: blur(10px);
+    background-color: var(--background-color-blur);
+}
+
+h5 {
+    color:var(--color-gold);
+}
+.nav-link {
+    color:var(--color-gold);
+    font-size: 1.1rem;
+}
+/* .navbar{
+    background-color: var(--color-primary);
+} */
