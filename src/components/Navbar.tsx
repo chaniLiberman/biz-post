@@ -17,7 +17,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ userInfo, setUserInfo ,darkMod
             <nav className="navbar navbar-expand-lg shadow" data-bs-theme={`${theme}`}>
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/cards">
-                        <img src="/Images/logo6.PNG" style={{ width: "220px", height: "65px" }} />
+                        <img src="/Images/logo.PNG" style={{ width: "220px", height: "65px" }} />
                     </NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

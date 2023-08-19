@@ -14,7 +14,8 @@
       "zip": 1344001,
       "role": "Admin",
       "favCards": [
-        2
+        2,
+        5
       ]
     },
     {
@@ -103,7 +104,7 @@
       "state": "Reshon-le'tzion",
       "city": "Reshon-le'tzion",
       "country": "Israel",
-      "street": "Shoham",
+      "street": "Hdudaim",
       "houseNumber": "5",
       "zip": "99000"
     },
@@ -146,19 +147,19 @@
     {
       "id": 6,
       "userId": 1,
-      "title": "Hertz",
-      "subTitle": "Car rental",
-      "description": "Hertz offers a professional and reliable car rental service in major cities and airports in Israel and around the world.",
-      "phone": "1-700-507-555",
-      "email": "service@Hertz.co.il",
-      "web": "https://www.hertz.co.il/he/homepage/.aspx",
+      "title": "Magnolya",
+      "subTitle": "Diamond, gold and silver jewelry",
+      "description": "Make your figure chic and up-to-date with the help of fashionable jewelry full of inspiration and a spectacular design touch.",
+      "phone": "055-9457291",
+      "email": "Contact@Magnolia.Co.Il",
+      "web": "https://www.magnolia.co.il/?___store=he",
       "imageUrl": "/Images/card6main.jpg",
-      "imageAlt": "cars",
-      "state": "Hertzeli'a",
-      "city": "Hertzeli'a",
-      "country": "Israel",
-      "street": "Yahalom",
-      "houseNumber": "8",
+      "imageAlt": "jewelry",
+      "state": "London",
+      "city": "London",
+      "country": "U.S.A",
+      "street": "Tchelet",
+      "houseNumber": "22",
       "zip": "99000"
     }
   ]

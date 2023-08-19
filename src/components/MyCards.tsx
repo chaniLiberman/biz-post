@@ -43,7 +43,7 @@ return (
                         <div className="row">
                             {addCard.map((card: Card) => (<div key={card.id} className="card col-md-4 mx-2 mt-4"
                                 style={{ width: "25rem" }}>
-                                <img src={card.imageUrl} className="card-img-top" onClick={() => navigate(`/cards/card-details/${card.id}`)} alt={card.imageAlt} />
+                                <img src={card.imageUrl} className="card-img-top h-75" onClick={() => navigate(`/cards/card-details/${card.id}`)} alt={card.imageAlt} />
                                 <div className="card-body text-center" style={{ color: "#947427" }}>
                                     <h5 className="card-title">{card.title}</h5>
                                     <p className="card-text">{card.subTitle}</p>
