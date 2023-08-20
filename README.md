@@ -33,5 +33,5 @@ A fun test
 
 Thank you !!!
 
-  ![dark mode](./תמונות/home-darkMode.jpg)
+  ![dark mode](./pictures/home-darkMode.jpg)
   
