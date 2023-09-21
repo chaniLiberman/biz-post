@@ -10,6 +10,21 @@ A platform for publishing websites on the Internet
 * Boot-Strap
 * Font-awesome Icons
 
+## Back-End:
+* Node.js
+* joi
+* bcrypt
+* cors
+* express   
+* jsonwebtoken
+* lodash
+* mongoose
+* morgan
+* chalk
+
+## Data base:
+  mongo db
+
 ## Dependencies Installation:
    npm i (To Install all required in Client side) example : node_module
 
@@ -19,14 +34,24 @@ On this website you can view a variety of businesses and see their extended deta
 ## Getting started
 # Dependencies
 Below are links to 3 types of users through which you can see the differences in permissions and display: 
-Admin user type: email: chaniliber2@gmail.com password: 12345678
-Business user: email: hadasLib2@gmail.com password: 45678912 
-Normal type of user: email: avital@gmail.com password: 789
+Admin user type: email: chaniliber2@gmail.com 
+                 password: 12345678
+Business user: email: hadas@gmail.com
+                password: 45678912 
+Normal type of user: email: avital@gmail.com 
+                password: 78912345
 
 # Executing program
-To run the website, open a new terminal and run the following command: 
-* Server side: json-server --watch db.json --port 8000 
-* After that, Client side: npm start
+To run the site, open a new terminal 
+Client side : enter the client folder by running the command : cd biz-post-client
+And then run the npm start command
+Server side : Open another terminal and run the cd biz-post-server command
+and then the nodemon index command
+
+## Environment Variables
+PORT = 8005
+DB = "mongodb://127.0.0.1:27017/biz-post"
+jwtKey = "chanilib"
 
 Authors
 A fun test
