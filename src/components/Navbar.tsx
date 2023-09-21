@@ -79,6 +79,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ userInfo, setUserInfo ,darkMod
                                         <img src="/Images/user.png" alt="user" style={{ width: "40px", height: "40px" }} onClick={() => {
                                             alert("click ok if you want to logout")
                                             sessionStorage.removeItem("userInfo")
+                                            sessionStorage.removeItem("token")
                                             setUserInfo({ email: false, role: false })
                                             navigate("/cards")
                                         }} />

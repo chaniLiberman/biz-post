@@ -2,11 +2,11 @@ import { useFormik } from "formik";
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { addUser } from "../services/usersService";
-import { JsxEmit } from "typescript";
-import { json } from "stream/consumers";
-import Card from "../interfaces/Card";
-import { successMsg } from "../services/feedbacksService";
+import { addUser, getTokenDetails } from "../services/usersService";
+// import { JsxEmit } from "typescript";
+// import { json } from "stream/consumers";
+// import Card from "../interfaces/Card";
+import { errorMsg, successMsg } from "../services/feedbacksService";
 import { SiteTheme } from "../App";
 
 
@@ -15,7 +15,7 @@ interface RegisterProps {
 }
 
 const Register: FunctionComponent<RegisterProps> = ({ setUserInfo }) => {
-    let theme =useContext(SiteTheme);
+    let theme = useContext(SiteTheme);
     let [roles, setRoles] = useState<boolean>(false);
     let navigate = useNavigate();
     let formik = useFormik({
@@ -40,38 +40,47 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo }) => {
         validationSchema: yup.object({
             firstName: yup.string().required().min(2),
             lastName: yup.string().required().min(2),
-            middleName: yup.string(),
+            middleName: yup.string().notRequired(),
             phone: yup.string().required().min(9),
             email: yup.string().required().email(),
-            password: yup.string().required().min(6),
-            imgAlt: yup.string(),
-            imgUrl: yup.string(),
-            state: yup.string(),
+            password: yup.string().required().min(8),
+            imgAlt: yup.string().notRequired(),
+            imgUrl: yup.string().notRequired(),
+            state: yup.string().notRequired(),
             country: yup.string().required().min(2),
             city: yup.string().required().min(2),
             street: yup.string().required().min(2),
             houseNumber: yup.number().required(),
-            zip: yup.number(),
-            role: yup.string(),
+            zip: yup.number().notRequired(),
+            role: yup.string().notRequired(),
         }),
         onSubmit: (values) => {
             let role = roles ? 'Business' : 'Regular'
             values = { ...values, role: role }
             addUser({ ...values, favCards: [] })
                 .then((res) => {
-                    sessionStorage.setItem("userInfo", JSON.stringify({
-                        email: res.data.email,
-                        role: res.data.role,
-                        id: res.data.id,
-                        firstName: res.data.firstName,
-                    }))
-                    successMsg(`hello ${values.firstName} wellcome`)
+                    sessionStorage.setItem(
+                        "token",
+                        JSON.stringify({
+                            token:res.data
+                        }));
+                    sessionStorage.setItem(
+                        "userInfo",
+                        JSON.stringify({
+                            email: (getTokenDetails() as any).email,
+                            role: (getTokenDetails() as any).role,
+                            id: (getTokenDetails() as any)._id
+                        }));
+                    successMsg(`hello ${values.email} wellcome`)
                     navigate("/cards");
                     setUserInfo(
                         JSON.parse(sessionStorage.getItem("userInfo") as string)
                     );
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    errorMsg("Data must be checked again")
+                    console.log(err)
+                })
         }
     })
     useEffect(() => {
@@ -226,7 +235,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo }) => {
                             name="houseNumber"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} />
-                        <label htmlFor="validationCustom01" className="form-label">House Number</label>
+                        <label htmlFor="validationCustom01" className="form-label">House Number *</label>
                         {formik.touched.houseNumber && formik.errors.houseNumber && (<p className="text-danger">{formik.errors.houseNumber}</p>)}
                     </div>
                     <div className="col-md-6 form-floating mb-3">

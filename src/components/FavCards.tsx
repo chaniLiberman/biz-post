@@ -1,10 +1,11 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import Card from "../interfaces/Card";
-import { getUserById, updateUser } from "../services/usersService";
+import { addToArrayFav, getUserById, updateUser } from "../services/usersService";
 import { getCardByCardId } from "../services/cardsService";
 import User from "../interfaces/User";
 import { SiteTheme, UserInfo } from "../App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { successMsg } from "../services/feedbacksService";
 
 interface FavCardsProps {
     userInfo: UserInfo;
@@ -12,46 +13,44 @@ interface FavCardsProps {
 
 const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo }) => {
     let theme =useContext(SiteTheme);
-    const loadFavCards = (favCardIds: number[]) => {
-        return Promise.all(
-            favCardIds.map(cardId => getCardByCardId(cardId))
-        )
-            .then(res => setFavCards(res.map(cardId => cardId.data)))
-    }
-
-    let [favCards, setFavCards] = useState<Card[]>([]);
-
+    let navigate = useNavigate();
+    const[user,setUser] = useState<User | undefined>()
     useEffect(() => {
         if (userInfo.id === undefined) { return; }
         getUserById(userInfo.id)
-            .then(res => loadFavCards(res.data[0].favCards as number[]))
+            .then(res => setUser(res.data))
             .catch((err) => console.log(err))
     }, [userInfo.id]);
 
-    let removeFromFavorite = (cardId: number | undefined) => {
-        let user: User;
-        if (userInfo.id === undefined) { return; }
-        getUserById(userInfo.id)
-            .then(res => {
-                user = res.data[0] as User
-                if (user.id === undefined) { return; }
-                user.favCards = user.favCards?.filter(x => x !== cardId)
-                //post user to server
-                return updateUser(user, user.id)
-            })
-            .then(() => loadFavCards(user.favCards || []))
+    let removeFromFavorite = (cardId: string | undefined) => {
+        if(!userInfo?.id || !cardId) return
+        if (user && user.favCards?.find(card => card._id === cardId)) {
+             let cards =user.favCards
+             let idx = user.favCards.findIndex(c => c._id === cardId)
+             cards.splice(idx,1)
+             setUser({...user,favCards:cards} as any)
+        }
+
+        addToArrayFav(userInfo.id!, cardId)
+        .then((res) => {
+            successMsg("Card removed from favorites");
+            
+        })
+        .catch((err) => console.log(err))
     }
+
+    
     return (
         <>
             <h5 className="display-1 pt-3 text-center">FAVORITE</h5>
             <h5 className="display-1 pt-3 text-center" style={{ fontSize: "2.3rem" }}>My favorites</h5>
-            {favCards.length ?
+            {user?.favCards?.length ?
                 (
                     <div className="container">
                         <div className="row">
-                            {favCards.map((card: Card) =>
-                            (<div key={card.id} className="card col-md-4 mx-2 mt-4" style={{ width: "25rem" }}>
-                                <img src={card.imageUrl} className="card-img-top h-75" alt={card.imageAlt} />
+                            {user.favCards.map((card: Card) =>
+                            (<div key={card._id} className="card col-md-4 mx-2 mt-4" style={{ width: "25rem" }}>
+                                <img src={card.imageUrl} className="card-img-top h-75" onClick={() => navigate(`/cards/card-details/${card._id}`)} alt={card.imageAlt} />
                                 <div className="card-body text-center" style={{ color: "#947427" }}>
                                     <h5 className="card-title">{card.title}</h5>
                                     <p className="card-text">{card.subTitle}</p>
@@ -61,7 +60,7 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo }) => {
                                     <li className="list-group-item"><i className="fa-regular fa-envelope"></i> {card.email}</li>
                                 </ul>
                                 <div className="card-body">
-                                    <i className="fa-solid fa-heart" onClick={() => removeFromFavorite(card.id)}></i>
+                                     <i className="fa-solid fa-heart"  onClick={() => removeFromFavorite(card._id)} style={{ color: "#ff0000" }}></i>
                                 </div>
                             </div>
                             ))}
@@ -75,7 +74,7 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo }) => {
                Still haven't clicked as a favorite? You are welcome to click - for your convenience
                <h5><Link to="/cards" className="text-black">choose favorite <i className="fa-solid fa-heart fa-xs"></i></Link></h5> 
                </h1>
-             <h2 className="text-center"><img src="/Images/logo6.PNG" style={{ width: "220px", height: "65px" }} /></h2>
+             <h2 className="text-center"><img src="/Images/logo.PNG" style={{ width: "220px", height: "65px" }} /></h2>
                </div>
                </div>)
                
@@ -87,3 +86,8 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo }) => {
 }
 
 export default FavCards;
+
+
+
+
+

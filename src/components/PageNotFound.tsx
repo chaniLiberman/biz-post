@@ -12,7 +12,7 @@ const PageNotFound: FunctionComponent<PageNotFoundProps> = () => {
                 <h1 className="text-center mb-5" style={{ fontSize: "2rem" }}>
                Page Not Found
                 </h1>
-                <h2 className="text-center"><img src="/Images/logo6.PNG" style={{ width: "220px", height: "65px" }} /></h2>
+                <h2 className="text-center"><img src="/Images/logo.PNG" style={{ width: "220px", height: "65px" }} /></h2>
                 </div>
                 </div>
         </>

@@ -19,33 +19,20 @@ import About from './components/About';
 import SandBox from './components/SandBox';
 
 export interface UserInfo {
-  id?: number,
+  id?: string,
   email: string | false,
   role: 'Admin' | 'Business' | 'Regular'
+  favCards: string[] | Card[]
 }
 
-// let themes = {
-//   light: {
-//     color: "black",
-//     background: "white"
-//   },
-//   dark: {
-//     color: "white",
-//     background: "black"
-//   }
-// }
-// export let SiteTheme = createContext(themes.light)
-
-
-const theme = {
+let theme = {
   light: "light",
   dark: "dark",
 };
 export let SiteTheme = createContext(theme.light);
 
 function App() {
-  // let [darkMode, setDarkMode] = useState<boolean>(false);
-  let [darkMode, setDarkMode] = useState<boolean>(
+    let [darkMode, setDarkMode] = useState<boolean>(
     JSON.parse(localStorage.getItem("darkMode")!)
   );
   let [userInfo, setUserInfo] = useState<UserInfo>(() => {
@@ -64,15 +51,15 @@ function App() {
         <Router>
           <Navbar userInfo={userInfo} setUserInfo={setUserInfo} darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
-          <Route path="/" element={<Home userInfo={userInfo} setUserInfo={setUserInfo} cards={cards} setCards={setCards} />} />
-          <Route path="/cards" element={<Home userInfo={userInfo} setUserInfo={setUserInfo} cards={cards} setCards={setCards} />} />
+          <Route path="/" element={<Home userInfo={userInfo} setUserInfo={setUserInfo} cards={cards} setCards={setCards} />} /> 
+          <Route path="/cards" element={<Home userInfo={userInfo} setUserInfo={setUserInfo} cards={cards} setCards={setCards} />} /> 
           <Route path="/login" element={<Login setUserInfo={setUserInfo} />} />
           <Route path="/register" element={<Register setUserInfo={setUserInfo} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/fav-cards" element={<FavCards userInfo={userInfo} />} />
+          <Route path="/fav-cards" element={<FavCards userInfo={userInfo} />} /> 
           <Route path="/cards/new" element={<AddCard />} />
           <Route path="/my-cards" element={<MyCards userInfo={userInfo} />} />
-          <Route path="/my-cards/update/:id" element={<UpdateCard />} />
+          <Route path="/my-cards/update/:id" element={<UpdateCard />} />           
           <Route path="/cards/card-details/:id" element={<CardDetails cards={cards} setCards={setCards} />} />
           <Route path="/sand-box" element={<SandBox />} />
           <Route path="*" element={<PageNotFound />} />

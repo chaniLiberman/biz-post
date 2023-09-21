@@ -10,12 +10,12 @@ interface MyCardsProps {
 }
 
 const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
-    let theme =useContext(SiteTheme);
+    let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [addCard, setAddCard] = useState<Card[]>([]);
     let [cardChange, setCardChange] = useState<boolean>(false);
     useEffect(() => {
-        let userId: number = JSON.parse(sessionStorage.getItem("userInfo") as string).id;
+        let userId: string = JSON.parse(sessionStorage.getItem("userInfo") as string).id;
         getCardByUserId(userId)
             .then((res) => setAddCard(res.data))
             .catch((err) => console.log(err))
@@ -23,7 +23,7 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
 
     let render = () => { setCardChange(!cardChange) }
 
-    let handleDlete = (id: number) => {
+    let handleDlete = (id: string) => {
         if (window.confirm("Are you sure?")) {
             deleteCard(id)
                 .then((res) => {
@@ -41,9 +41,9 @@ return (
                 (
                     <div className="container">
                         <div className="row">
-                            {addCard.map((card: Card) => (<div key={card.id} className="card col-md-4 mx-2 mt-4"
+                            {addCard.map((card: Card) => (<div key={card._id} className="card col-md-4 mx-2 mt-4"
                                 style={{ width: "25rem" }}>
-                                <img src={card.imageUrl} className="card-img-top h-75" onClick={() => navigate(`/cards/card-details/${card.id}`)} alt={card.imageAlt} />
+                                <img src={card.imageUrl} className="card-img-top h-75" onClick={() => navigate(`/cards/card-details/${card._id}`)} alt={card.imageAlt} />
                                 <div className="card-body text-center" style={{ color: "#947427" }}>
                                     <h5 className="card-title">{card.title}</h5>
                                     <p className="card-text">{card.subTitle}</p>
@@ -57,8 +57,8 @@ return (
                                     (
                                         <>
                                         <ul className="text-center mt-3 d-flex p-2">
-                                            <Link to={`update/${card.id}`}><i className="fa-solid fa-pen mx-3" style={{ color: "#947427" }}></i></Link>
-                                            <Link to=""><i className="fa-solid fa-trash" style={{ color: "#947427" }} onClick={() => handleDlete(card.id as number)}></i></Link>
+                                            <Link to={`update/${card._id}`}><i className="fa-solid fa-pen mx-3" style={{ color: "#947427" }}></i></Link>
+                                            <Link to=""><i className="fa-solid fa-trash" style={{ color: "#947427" }} onClick={() => handleDlete(card._id as string)}></i></Link>
                                         </ul>
                                         </>
                                     )
@@ -77,7 +77,7 @@ return (
                 You haven't published your business yet? You are welcome to post on our popular site
                 <h5><Link to="/cards" className="text-black">for advertising the business <i className="fa-solid fa-plus fa-xs"></i></Link></h5> 
                 </h1>
-              <h2 className="text-center"><img src="/Images/logo6.PNG" style={{ width: "220px", height: "65px" }} /></h2>
+              <h2 className="text-center"><img src="/Images/logo.PNG" style={{ width: "220px", height: "65px" }} /></h2>
                 </div>
                 </div>)
            

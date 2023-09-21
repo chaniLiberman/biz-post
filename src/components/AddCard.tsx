@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { addCard } from "../services/cardsService";
-import { successMsg } from "../services/feedbacksService";
+import { errorMsg, successMsg } from "../services/feedbacksService";
 
 interface AddCardProps {
 
@@ -32,7 +32,7 @@ const AddCard: FunctionComponent<AddCardProps> = () => {
         validationSchema: yup.object({
             title: yup.string().required(),
             subTitle: yup.string().required(),
-            description: yup.string().required().max(15),
+            description: yup.string().required().max(180),
             phone: yup.string().required().min(9),
             email: yup.string().required().email("Please Valid Email"),
             web: yup.string(),
@@ -52,7 +52,10 @@ const AddCard: FunctionComponent<AddCardProps> = () => {
                     navigate("/cards")
                     successMsg("card added successfully!!")
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    errorMsg("Data must be checked again")
+                    console.log(err)
+                })
         }
     })
     useEffect(() => {

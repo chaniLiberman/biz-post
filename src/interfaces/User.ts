@@ -1,7 +1,8 @@
 import Card from "./Card";
 
 export default interface User {
-    id?: number;
+    // id?: number;
+     _id?: string;
     firstName?: string;
     lastName?: string;
     middleName?: string;
@@ -17,5 +18,5 @@ export default interface User {
     houseNumber?: number;
     zip?: number;
     role?: string;
-    favCards?: number[];
+    favCards?: any[]
 }

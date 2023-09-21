@@ -13,7 +13,7 @@ const SandBox: FunctionComponent<SandBoxProps> = () => {
             <h1 className="text-center mb-5" style={{ fontSize: "2.5rem" }}>
             The page will be up soon...
             </h1>
-             <h2 className="text-center"><img src="/Images/logo6.PNG" style={{ width: "220px", height: "65px" }} /></h2>
+             <h2 className="text-center"><img src="/Images/logo.PNG" style={{ width: "220px", height: "65px" }} /></h2>
             </div>
         </div>
     )

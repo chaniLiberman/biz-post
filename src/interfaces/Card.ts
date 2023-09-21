@@ -1,6 +1,7 @@
 export default interface Card {
-    id?: number;
-    userId?: number;
+    // id?: number;
+    _id?: string;
+    userId?: string;
     title: string;
     subTitle: string;
     description: string;

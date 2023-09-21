@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { checkUser } from "../services/usersService";
+import { checkUser, getTokenDetails } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 
 
@@ -27,23 +27,30 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
             onSubmit: (values) => {
                 checkUser(values)
                     .then((res) => {
-                        if (res.data.length) {
-                            sessionStorage.setItem("userInfo", JSON.stringify({
-                                email: res.data[0].email,
-                                role: res.data[0].role,
-                                id: res.data[0].id,
+                        navigate("/cards");
+                        successMsg(`hello ${values.email}`)
+                        sessionStorage.setItem(
+                            "token",
+                            JSON.stringify({
+                                token:res.data
                             }));
-                            successMsg(`hello ${values.email}`)
-                            navigate("/cards");
+                        sessionStorage.setItem(
+                            "userInfo",
+                            JSON.stringify({
+                                email: (getTokenDetails() as any).email,
+                                role: (getTokenDetails() as any).role,
+                                id: (getTokenDetails() as any)._id
+                            }));
+                            
                             setUserInfo(
                                 JSON.parse(sessionStorage.getItem("userInfo") as string)
                             );
                         }
-                        else {
-                            errorMsg("Wrong email or password");
-                        }
-                    })
-                    .catch((err) => console.log(err));
+                    )
+                     .catch((err) => {
+                        errorMsg("Wrong email or password")
+                        console.log(err)
+                    });
             }
         }
     );
